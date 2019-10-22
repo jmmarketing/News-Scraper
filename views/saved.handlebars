@@ -1,0 +1,81 @@
+ <!-------------------------------------- NAV BAR --------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">BHW Agregator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/saved">Saved Articles<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                <button type="button" class="btn btn-secondary">Clear Posts</button>
+            </span>
+        </div>
+    </nav>
+
+    <!-------------------------------------- END NAV BAR --------------------------------------------->
+
+    <!-------------------------- JUMBOTRON ---------------------------------->
+    <div class="jumbotron text-center">
+        <div class="overlay">
+        </div>
+        <div class="background-image">
+        </div>
+        <div class="caption">
+            <h1>Saved Posts</h1>
+            <p>Your Saved BHW Posts</p>
+        </div>
+    </div>
+
+    <!-------------------------- END JUMBOTRON ---------------------------------->
+
+    <!--------------------------- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
+    <div id="hide-this">
+        <div class="alert alert-info mx-3 text-center" role="alert">
+            <h4>No Posts Saved! You Gotta Save Something!</h4>
+        </div>
+
+        <div class="card mx-3 mb-2">
+            <div class="card-header">
+                Come On, Go Browse Some Posts...
+            </div>
+            <div class="card-body">
+                <a href="/" role="button" class="btn btn-info btn-block">Browse Posts</a>
+            </div>
+        </div>
+    </div>
+    <!--------------------------- END --- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
+
+
+    <!-------------------------- EXAMPLE POSTS   -------- ---------------------------------->
+
+    <div class="container-fluid">
+
+        <div class="card my-1" data-id="2820023802example">
+            <div class="card-header">
+                <h4>
+                    <a href="http://example.com" target="_blank" class="post-link">This is an example BHW Post that
+                        could be posted.</a>
+                    <button type="button" class="btn btn-success float-right" id="delete-button">Delete</button>
+                    <button type="button" class="btn btn-success float-right mx-1" id="add-note">Notes</button>
+                </h4>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="float-left">
+                    <span id="last-message">2 minutes ago</span>
+                    <span id="last-message"><i class="far fa-eye mx-3"> 457</i></span>
+                    <span id="last-message"><i class="far fa-comments"> 36</i></span>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
