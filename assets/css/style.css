@@ -1,0 +1,9 @@
+.jumbotron{
+    widows: 100%;
+    height:500px;
+    background-image: url(../images/bkgimage.png);
+    background-size: cover;
+}
+.card-footer{
+    background:white;
+}
