@@ -37,24 +37,7 @@
 
     <!-------------------------- END JUMBOTRON ---------------------------------->
 
-    <!--------------------------- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
-    <div id="hide-this">
-        <div class="alert alert-info mx-3 text-center" role="alert">
-            <h4>No Posts Yet! Make Sure to Scrape!</h4>
-        </div>
-
-        <div class="card mx-3 mb-2">
-            <div class="card-header">
-                You Have A Couple Options...
-            </div>
-            <div class="card-body">
-                <button type="button" class="btn btn-info btn-block" id="scrape-posts">Scrape Latest Posts</button>
-                <a href="/saved" role="button" class="btn btn-info btn-block">View Your Saved Posts</a>
-            </div>
-        </div>
-    </div>
-    <!--------------------------- END --- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
-
+    
 
     <!-------------------------- DYNAMIC POSTS   -------- ---------------------------------->
 
@@ -77,6 +60,25 @@
 
             </div>
         </div>
+        {{else}}
+        <!--------------------------- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
+    <div id="hide-this">
+        <div class="alert alert-info mx-3 text-center" role="alert">
+            <h4>No Posts Yet! Make Sure to Scrape!</h4>
+        </div>
+
+        <div class="card mx-3 mb-2">
+            <div class="card-header">
+                You Have A Couple Options...
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-info btn-block" id="scrape-posts">Scrape Latest Posts</button>
+                <a href="/saved" role="button" class="btn btn-info btn-block">View Your Saved Posts</a>
+            </div>
+        </div>
+    </div>
+    <!--------------------------- END --- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
+
         {{/each}}
 
     </div>

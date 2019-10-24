@@ -20,6 +20,10 @@ var ArticleSchema = new Schema({
     replies: {
         type: String
     },
+    saved:{
+        type: Boolean,
+        default: false
+    },
     notes: [{
         type: Schema.Types.ObjectId,
         ref: "Note"

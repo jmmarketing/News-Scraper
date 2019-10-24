@@ -36,7 +36,32 @@
 
     <!-------------------------- END JUMBOTRON ---------------------------------->
 
-    <!--------------------------- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
+    
+
+    <!-------------------------- EXAMPLE POSTS   -------- ---------------------------------->
+
+    <div class="container-fluid">
+        {{#each articles}}
+        <div class="card my-1" data-id="{{this._id}}">
+            <div class="card-header">
+                <h4>
+                    <a href="{{this.link}}" target="_blank" class="post-link">{{this.title}}</a>
+                    <button type="button" class="btn btn-success float-right" id="delete-button" data-id="{{this._id}}">Delete</button>
+                    <button type="button" class="btn btn-success float-right mx-1" id="add-note" data-id="{{this._id}}">Notes</button>
+                </h4>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="float-left">
+                    <span id="last-message"><strong>Last Reply: </strong>{{this.lastMessage}}</span>
+                    <span id="post-views"><i class="far fa-eye mx-3"> {{this.views}}</i></span>
+                    <span id="post-replies"><i class="far fa-comments"> {{this.replies}}</i></span>
+                </div>
+
+
+            </div>
+        </div>
+        {{else}}
+        <!--------------------------- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
     <div id="saved-hide-this">
         <div class="alert alert-info mx-3 text-center" role="alert">
             <h4>No Posts Saved! You Gotta Save Something!</h4>
@@ -52,30 +77,6 @@
         </div>
     </div>
     <!--------------------------- END --- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
-
-
-    <!-------------------------- EXAMPLE POSTS   -------- ---------------------------------->
-
-    <div class="container-fluid">
-
-        <div class="card my-1" data-id="2820023802example">
-            <div class="card-header">
-                <h4>
-                    <a href="http://example.com" target="_blank" class="post-link">This is an example BHW Post that
-                        could be posted.</a>
-                    <button type="button" class="btn btn-success float-right" id="delete-button">Delete</button>
-                    <button type="button" class="btn btn-success float-right mx-1" id="add-note">Notes</button>
-                </h4>
-            </div>
-            <div class="card-footer text-muted">
-                <div class="float-left">
-                    <span id="last-message">2 minutes ago</span>
-                    <span id="post-views"><i class="far fa-eye mx-3"> 457</i></span>
-                    <span id="post-replies"><i class="far fa-comments"> 36</i></span>
-                </div>
-
-
-            </div>
-        </div>
+    {{/each}}
 
     </div>

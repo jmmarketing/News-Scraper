@@ -3,8 +3,8 @@ var db = require("../models");
 module.exports = function(app){
 
     app.get("/", function(req,res){
-        db.Article.find({}).then(function(dbArticles){
-            
+        db.Article.find({saved: false}).then(function(dbArticles){
+
             res.render("index", {articles: dbArticles});
         }).catch(function(err){
             res.status(400).send(err.message); 
@@ -13,6 +13,11 @@ module.exports = function(app){
 
 
     app.get("/saved", function(req,res){
-        res.render("saved")
+        db.Article.find({saved: true}).then(function(dbArticles){
+
+            res.render("saved", {articles: dbArticles});
+        }).catch(function(err){
+            res.status(400).send(err.message); 
+        })
     })
 }
