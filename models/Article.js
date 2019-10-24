@@ -10,6 +10,10 @@ var ArticleSchema = new Schema({
     lastMessage: {
         type: String
     },
+    link:{
+        type: String,
+        required: true
+    },
     views: {
         type: String
     },

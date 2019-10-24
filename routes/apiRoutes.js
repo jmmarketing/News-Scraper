@@ -4,37 +4,67 @@ var cheerio = require("cheerio");
 
 module.exports = function (app) {
 
-    // app.get("/scrape", function (req, res) {
-    //     console.log("Scrape Started")
-    //     axios.get("http://blackhatworld.com").then(function (response) {
-    //         var $ = cheerio.load(response.data);
 
-    //         $(".discussionListItem visible").each(function (i, element) {
-    //             var result = {};
+    // Scrapes the Title, Link, Last Message Data, Views, Replies, from BHW
+    app.get("/scrape", function (req, res) {
 
-    //             result.title = $(element)
-    //                 .find("h3 a")
-    //                 .text();
-    //             result.link = $(element)
-    //                 .find("h3 a")
-    //                 .attr("href");
-    //             result.views = $(element)
-    //                 .find("dl .minor")
-    //                 .children("dd").text()
-    //             result.replies = $(element)
-    //                 .find("dl .major")
-    //                 .children("dd").text()
+        axios.get("http://blackhatworld.com").then(function (response) {
+            var $ = cheerio.load(response.data);
 
-    //             db.Article.create(result).then(function (dbArticle) {
-    //                 console.log(dbArticle);
-    //             }).catch(function (err) {
-    //                 console.log(err);
-    //             });
+            console.log("Scrape Started")
+            console.log($(".discussionListItem.visible").length, 'items selected')
+            $(".discussionListItem.visible").each(function (i, element) {
+                var result = {};
 
-    //         });
+                result.title = $(element)
+                    .find("h3 a")
+                    .text();
+                result.lastMessage = $(element)
+                    .find("abbr.DateTime")
+                    .text()
+                result.link = "http://blackhatworld.com/" + $(element)
+                    .find("h3 a")
+                    .attr("href");
+                result.views = $(element)
+                    .find("dl.minor")
+                    .children("dd").text()
+                result.replies = $(element)
+                    .find("dl.major")
+                    .children("dd").text()
 
-    //         res.send("Done Scraping");
-    //     })
-    // })
+                console.log(result);
+                db.Article.create(result).then(function (dbArticle) {
+                    console.log(dbArticle);
+                }).catch(function (err) {
+                    console.log(err);
+                });
+
+            });
+
+            res.send("Done Scraping");
+        }).catch(err => console.log(err))
+    })
+
+    // Gets all Articles
+    app.get("/articles", function (req, res) {
+        db.Article.find({})
+            .then(function (dbArticles) {
+                res.json(dbArticles);
+            }).catch(function (err) {
+                res.json(err);
+            })
+    });
+
+
+    //Gets All Notes
+
+    app.get("/notes", function (req, res) {
+        db.Note.find({}).then(function (dbNotes) {
+            res.json(dbNotes);
+        }).catch(function (err) {
+            res.json(err);
+        })
+    })
+
 
 };
