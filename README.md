@@ -19,6 +19,7 @@ At any point you are able to un-save the article, as well as clear all the posts
 * Axios
 * Ajax
 * Cheerio
+* Morgan (for logging)
 
 Note: Node was used for the local environment before deploying, as well as a local MongoDB. 
 
