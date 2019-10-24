@@ -56,27 +56,27 @@
     <!--------------------------- END --- IF NO SCRAPE RESULTS / SHOW THIS SECTION ------->
 
 
-    <!-------------------------- EXAMPLE POSTS   -------- ---------------------------------->
+    <!-------------------------- DYNAMIC POSTS   -------- ---------------------------------->
 
     <div class="container-fluid">
-
-        <div class="card my-1" data-id="2820023802example">
+        {{#each articles}}
+        <div class="card my-1" data-id="{{this._id}}">
             <div class="card-header">
                 <h4>
-                    <a href="http://example.com" target="_blank" class="post-link">This is an example BHW Post that
-                        could be posted.</a>
-                    <button type="button" class="btn btn-success float-right" id="save-button">Save</button>
+                    <a href="{{this.link}}" target="_blank" class="post-link">{{this.title}}</a>
+                    <button type="button" class="btn btn-success float-right" id="save-button" data-id="{{this._id}}">Save</button>
                 </h4>
             </div>
             <div class="card-footer text-muted">
                 <div class="float-left">
-                    <span id="last-message">2 minutes ago</span>
-                    <span id="last-message"><i class="far fa-eye mx-3"> 457</i></span>
-                    <span id="last-message"><i class="far fa-comments"> 36</i></span>
+                    <span id="last-message"><strong>Last Reply: </strong>{{this.lastMessage}}</span>
+                    <span id="post-views"><i class="far fa-eye mx-3"> {{this.views}}</i></span>
+                    <span id="post-replies"><i class="far fa-comments"> {{this.replies}}</i></span>
                 </div>
 
 
             </div>
         </div>
+        {{/each}}
 
     </div>

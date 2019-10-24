@@ -20,7 +20,7 @@ module.exports = function (app) {
                     .find("h3 a")
                     .text();
                 result.lastMessage = $(element)
-                    .find("abbr.DateTime")
+                    .find(".dateTime abbr")
                     .text()
                 result.link = "http://blackhatworld.com/" + $(element)
                     .find("h3 a")

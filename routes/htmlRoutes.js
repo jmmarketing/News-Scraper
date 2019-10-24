@@ -3,7 +3,12 @@ var db = require("../models");
 module.exports = function(app){
 
     app.get("/", function(req,res){
-        res.render("index")
+        db.Article.find({}).then(function(dbArticles){
+            
+            res.render("index", {articles: dbArticles});
+        }).catch(function(err){
+            res.status(400).send(err.message); 
+        })
     })
 
 
