@@ -43,7 +43,7 @@ require("./routes/htmlRoutes")(app);
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/bhw_scraper";
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI);
 
 
 // Start the server
