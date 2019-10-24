@@ -40,7 +40,7 @@ $(document).on("click", "#clear-posts", function(){
 
 // ###################### Saved Page Button Acttions ################
 
-$(document).on("click", "#delete-button", function(){
+$(document).on("click", "#unsave-button", function(){
     
     var articleID = $(this).attr("data-id");
     var queryURL = "/api/articles/unsave/" + articleID; 
@@ -58,7 +58,8 @@ $(document).on("click", "#delete-button", function(){
 
 $(document).on("click", "#save-note", function(){
     var note = $("textarea").val().trim();
-    var articleID = $(this).attr("data-id")
+    var articleID = $(".card.mb-2").attr("data-id")
+   
     $.ajax({
         url: "/articles/" +articleID + "/notes",
         method: "POST",
@@ -66,23 +67,19 @@ $(document).on("click", "#save-note", function(){
             text: note
         }
     }).then(function(){
+        console.log(articleID)
         document.location.reload(); 
     })
 
 })
 
-
-
-
-$(document).on("click", "#show-notes", function(){
-    
-    var articleID = $(this).attr("data-id");
+$(document).on("click", "#delete-note", function(){
+    var noteID = $(this).attr("data-id");
 
     $.ajax({
-        url: "/articles/" + articleID,
-        method: "GET"
+        url: "/api/notes/" +noteID,
+        method: "DELETE"
+    }).then(function(){
+        document.location.reload();
     })
-
-
 })
-

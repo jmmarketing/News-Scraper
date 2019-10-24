@@ -13,9 +13,9 @@ module.exports = function(app){
 
 
     app.get("/saved", function(req,res){
-        db.Article.find({saved: true}).then(function(dbArticles){
-
-            res.render("saved", {articles: dbArticles, notes:dbArticles.notes});
+        db.Article.find({saved: true}).populate("notes").then(function(dbArticles){
+            
+            res.render("saved", {articles: dbArticles});
         }).catch(function(err){
             res.status(400).send(err.message); 
         })

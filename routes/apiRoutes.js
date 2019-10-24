@@ -115,17 +115,26 @@ module.exports = function (app) {
       })
 
 
-    // Post Notes to Article
+    // Adds Notes to Article
     app.post("/articles/:articleID/notes", function(req,res){
         var articleID = req.params.articleID;
 
         db.Note.create(req.body).then(function(dbNote){
             return db.Article.findByIdAndUpdate({_id:articleID}, {
-                $push: {notes: dbNote._id}}, {new:true})
+                $push: {notes: dbNote}}, {new:true})
         }).then(function(dbArticle){
             res.json(dbArticle);
         }).catch(function(err){
             res.json(err);
+        })
+    })
+
+    // Delete Note From Article
+    app.delete("/api/notes/:id", function(req, res){
+        db.Note.findOneAndDelete({_id:req.params.id}).then(function(dbNote){
+            res.json(dbNote);
+        }).catch(function(err){
+            res.json(err)
         })
     })
 
