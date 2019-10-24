@@ -66,5 +66,67 @@ module.exports = function (app) {
         })
     })
 
+    // Saves Article
+    app.post("/api/articles/:id", function(req, res){
+        db.Article.findOneAndUpdate(
+            {_id:req.params.id},
+            {saved: true},
+            {new: true}
+        ).then(function(dbArticle) {
+            res.json(dbArticle);
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+
+     // Delete / Un-Saves Article
+     app.post("/api/articles/unsave/:id", function(req, res){
+        db.Article.findOneAndUpdate(
+            {_id:req.params.id},
+            {saved: false},
+            {new: true}
+        ).then(function(dbArticle) {
+            res.json(dbArticle);
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+
+    // Clear ALL Articles in Database
+    app.delete("/api/clear", function(req,res){
+        db.Article.deleteMany({}).then(function(dbArticles){
+            res.json(dbArticles);
+        }).catch(function(err){
+            res.json(err);
+        })
+    })
+
+    
+    // Get Notes from An Article
+    app.get("/articles/:id", function(req, res) {
+        db.Article.findOne({_id: req.params.id})
+          .populate("notes")
+          .then(function(dbArticle) {
+            res.json(dbArticle)
+          })
+          .catch(function(err) {
+            res.json(err);
+          })
+      })
+
+
+    // Post Notes to Article
+    app.post("/articles/:articleID/notes", function(req,res){
+        var articleID = req.params.articleID;
+
+        db.Note.create(req.body).then(function(dbNote){
+            return db.Article.findByIdAndUpdate({_id:articleID}, {
+                $push: {notes: dbNote._id}}, {new:true})
+        }).then(function(dbArticle){
+            res.json(dbArticle);
+        }).catch(function(err){
+            res.json(err);
+        })
+    })
 
 };

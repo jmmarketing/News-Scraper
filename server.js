@@ -40,8 +40,10 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/bhw_scraper";
+
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/bhw_scraper", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
 // Start the server

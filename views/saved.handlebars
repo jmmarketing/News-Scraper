@@ -15,7 +15,7 @@
             </li>
         </ul>
         <span class="navbar-text">
-            <button type="button" class="btn btn-secondary" id="clear-saved-posts">Clear Posts</button>
+            <button type="button" class="btn btn-secondary" id="clear-posts">Clear Posts</button>
         </span>
     </div>
 </nav>
@@ -47,10 +47,10 @@
             <h4>
                 <a href="{{this.link}}" target="_blank" class="post-link">{{this.title}}</a>
                 <button type="button" class="btn btn-success float-right" id="delete-button"
-                    data-id="{{this._id}}">Delete</button>
+                    data-id="{{this._id}}">Un-Save</button>
 
                 <button type="button" class="btn btn-primary float-right mx-2" data-toggle="modal"
-                    data-target="#exampleModalCenter" data-id="{{this._id}}">Notes</button>
+                    data-target="#exampleModalCenter" data-id="{{this._id}}" id="show-notes">Notes</button>
             </h4>
         </div>
         <div class="card-footer text-muted">
@@ -86,8 +86,8 @@
 
 
 
-<!------------ MODAL FOR NOTES --->
-<!-- Button trigger modal -->
+<!------------ MODAL FOR NOTES ---------------->
+
 
 
 <!-- Modal -->
@@ -103,25 +103,31 @@
             </div>
             <div class="modal-body">
                 <!-- Saved Notes -->
-                <div class="card">
+
+
+
+
+                
+                {{#each articles.notes}}
+                <div class="card" data-id="{{articles._id}}">
                     <div class="card-body">
-                        This is some text within a card body.
-                        <button type="button" class="btn btn-danger float-right" id="delete-note">X</button>
+                       <span id="populate-note">{{this.text}}</span> 
+                        <button type="button" class="btn btn-danger float-right" id="delete-note" data-id="{{articles._id}}">X</button>
                     </div>
                 </div>
-
+                {{/each}}
 
                 <!-- Note Input -->
                 <form>
                     <div class="form-group mt-2">
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                            placeholder="Enter New Note"></textarea>
+                            placeholder="Enter New Note" id="note-text"></textarea>
                     </div>
                 </form>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="save-note">Save Note</button>
+                <button type="button" class="btn btn-primary" id="save-note" data-id="{{articles._id}}">Save Note</button>
             </div>
         </div>
     </div>
